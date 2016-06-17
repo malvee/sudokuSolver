@@ -13,7 +13,6 @@ use Storable qw(dclone);
 8 => [66, 67, 68, 76, 77, 78, 86, 87, 88]
 	);
 
-
 sub probableboard{
 	my @arr;
 	my $arr;
@@ -193,7 +192,6 @@ for($i = 0; $i <9; $i++){
 	}
 }
 
-
 for($i = 0; $i <9; $i++){
 	my @columnContains = ();
 	for($j = 0; $j < 9; $j++){
@@ -220,12 +218,8 @@ for($i = 0; $i <9; $i++){
 				exit();
 			}
 			@{$poss[$j][$i]} = @values2;
-
 		}
-
-
 	}
-
 }
 
 for($i = 0; $i < 9; $i++){
@@ -267,7 +261,6 @@ for($i = 0; $i < 9; $i++){
 				exit();
 			}
 		}
-
 	}
 }
 
@@ -292,6 +285,7 @@ for($i = 0; $i < 9; $i++){
 		}
 	}
 }
+
 print "test\n";
 for($i = 0; $i < 9; $i++){
 	for($j = 0; $j < 9; $j++){
@@ -299,7 +293,6 @@ for($i = 0; $i < 9; $i++){
 	}
 	print "\n";
 }
-
 
 @possList = ();
 for($i = 0; $i < 9; $i++){
@@ -310,33 +303,13 @@ for($i = 0; $i < 9; $i++){
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 my @res = ();
 $a = lenOfArray $possList[0][1];
 $b = lenOfArray $possList[1][1];
 for($i = 0; $i < $a; $i++){
 	for($j = 0; $j < $b; $j++){
 		#probableboard function needed
-		my @newArr = @arr;
+		my @newArr = @{dclone(\@arr)};
 		#print "value is " . $possList[0][1][$i] . "\n";
 		$newArr[int($possList[0][0]/10)][$possList[0][0]%10] = $possList[0][1][$i];
 		$newArr[int($possList[1][0]/10)][$possList[1][0]%10] = $possList[1][1][$j];
@@ -356,7 +329,7 @@ if(@possList > 2){
 		@res2 = ();
 		for($j = 0; $j < lenOfArray $possList[$i][1]; $j++){
 			for($k = 0; $k < @res; $k++){
-				my @newArr = @arr;
+				my @newArr = @{dclone(\@arr)};
 				$newArr[int($possList[$i][0]/10)][$possList[$i][0]%10] = $possList[$i][1][$j];
 				for($l = 0; $l < lenOfArray $res[$k]; $l++){
 					$newArr[int($res[$k][$l][0] / 10)][$res[$k][$l][0] % 10] = $res[$k][$l][1];
@@ -372,11 +345,9 @@ if(@possList > 2){
 
 		}
 		@res = @{dclone(\@res2)};
-		
 	}
 }
 @newArr = @{dclone(\@arr)};
-$foundAns = 0;
 $i = 0;
 print "size of res " . scalar @res;
 print "\n";
